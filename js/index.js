@@ -562,11 +562,10 @@ async function main () {
     if (!target.value) { return }
 
     const video = target.value
-    const buf = await archive.readFile(video, 'binary')
-    const blob = new Blob([buf], {type: mime.lookup(video)})
 
     const videoElement = document.createElement('video')
-    videoElement.src = URL.createObjectURL(blob)
+    videoElement.setAttribute('controls', true)
+    videoElement.setAttribute('src', `dat://${link.replace('dat://', '')}${encodeURIComponent(video)}`)
 
     document.getElementById('title').innerHTML = video
 
